@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react'
-// import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import QuoteForm from './QuoteForm'
-import { quoteShow, quoteUpdate } from '../../api/quote.js'
+import { quoteShow, quoteUpdate, quoteDelete } from '../../api/quote.js'
 import createDifficulty from './createDifficulty'
 import getChangeHandler from './getChangeHandler'
 import messages from '../AutoDismissAlert/messages'
@@ -12,7 +12,7 @@ const QuoteShow = (props) => {
   // for now, only do edit
   const [quote, setQuote] = useState(null)
   const [isOwner, setIsOwner] = useState(null)
-  // const [redirect, setRedirect] = useState(null)
+  const [redirect, setRedirect] = useState(null)
 
   useEffect(() => {
     quoteShow(props.match.params.id)
@@ -38,19 +38,21 @@ const QuoteShow = (props) => {
       .catch(console.error)
   }
 
-  // const destroy = () => {
-  //   quoteDelete(quote, props.user)
-  //     .then(() => props.msgAlert({
-  //       heading: 'Successful Delete',
-  //       message: messages.deleteQuoteSuccess,
-  //       variant: 'success'
-  //     }))
-  //     .then(() => this.setRedirect(<Redirect to='/quotes' />))
-  //     .catch(console.error)
-  // }
+  const handleDelete = () => {
+    quoteDelete(quote, props.user)
+      .then(() => props.msgAlert({
+        heading: 'Successful Delete',
+        message: messages.deleteQuoteSuccess,
+        variant: 'success'
+      }))
+      .then(() => setRedirect(<Redirect to='/quotes' />))
+      .catch(console.error)
+  }
 
   let showJSX
-  if (!quote) {
+  if (redirect) {
+    showJSX = redirect
+  } else if (!quote) {
     showJSX = <p>Loading...</p>
   } else if (isOwner === false) {
     showJSX = <p>Can only see owned quotes for now</p>
@@ -61,6 +63,7 @@ const QuoteShow = (props) => {
         quote={quote}
         handleSubmit={handleSubmit}
         handleChange={getChangeHandler(quote, setQuote)}
+        handleDelete={handleDelete}
       />
     </Fragment>
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const QuoteForm = ({ quote, handleSubmit, handleChange }) => (
+const QuoteForm = ({ quote, handleSubmit, handleChange, handleDelete }) => (
   <form onSubmit={handleSubmit}>
     <label>Title</label>
     <input
@@ -24,6 +24,9 @@ const QuoteForm = ({ quote, handleSubmit, handleChange }) => (
       onChange={handleChange}
     />
     <button type='submit'>Submit</button>
+    {handleDelete &&
+      <button onClick={handleDelete}>Delete</button>
+    }
   </form>
 )
 
