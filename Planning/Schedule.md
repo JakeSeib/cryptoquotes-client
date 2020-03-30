@@ -1,29 +1,29 @@
 # Getting Started
 
 ### Planning
-1.  [ ] Create User Stories
-1.  [ ] Create Wire Frames
-1.  [ ] Create ERD
+1.  [x] Create User Stories
+1.  [x] Create Wire Frames
+1.  [x] Create ERD
 
 ### Set Up
 
 API
 
-1.  [ ] [Set up Rails API Template](https://git.generalassemb.ly/ga-wdi-boston/rails-api-template)
-1.  [ ] Create a Github Repository
-1.  [ ] Deploy to Heroku
+1.  [x] [Set up Rails API Template](https://git.generalassemb.ly/ga-wdi-boston/rails-api-template)
+1.  [x] Create a Github Repository
+1.  [x] Deploy to Heroku
 
 Client
 
-1.  [ ] [Set up React Auth Template](https://git.generalassemb.ly/ga-wdi-boston/react-auth-template)
-1.  [ ] Create a Github Repository
-1.  [ ] Deploy to Github Pages
+1.  [x] [Set up React Auth Template](https://git.generalassemb.ly/ga-wdi-boston/react-auth-template)
+1.  [x] Create a Github Repository
+1.  [x] Deploy to Github Pages
 
 ### API
-1.  [ ] Create Quotes resource and end points
-1.  [ ] Test Quotes with curl scripts/postman
-1.  [ ] Add the Quote relationship to a User
-1.  [ ] Add User ownership of Quotes to resource controller
+1.  [x] Create Quotes resource and end points
+1.  [x] Test Quotes with curl scripts/postman
+1.  [x] Add the Quote relationship to a User
+1.  [x] Add User ownership of Quotes to resource controller
 1.  [ ] Add Solved_quote resource and end points
 1.  [ ] Test Solved_quotes with curl scripts/postman
 1.  [ ] Add the Solved_quote relationship to a User
@@ -32,10 +32,10 @@ Client
 1.  [ ] Add Quote ownership of Solved_quotes to resource controller
 
 ### Client
-1.  [ ] Sign Up (curl/postman then web app)
-1.  [ ] Sign In (curl/postman then web app)
-1.  [ ] Change Password (curl/postman then web app)
-1.  [ ] Sign Out (curl/postman then web app)
+1.  [x] Sign Up (curl/postman then web app)
+1.  [x] Sign In (curl/postman then web app)
+1.  [x] Change Password (curl/postman then web app)
+1.  [x] Sign Out (curl/postman then web app)
 1.  [ ] All API calls have success or failure messages
 1.  [ ] Create Quote (curl/postman then web app)
 1.  [ ] Get all Quotes (curl/postman then web app)

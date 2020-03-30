@@ -2,22 +2,22 @@
 
 ### Deployment
 Be deployed online, where the rest of the world can access it.
-1.  [ ]  Host on your public Github page, not Github Enterprise.
-1.  [ ]  Deploy client application on GH pages.
-1.  [ ]  Deploy server application on Heroku.
+1.  [x]  Host on your public Github page, not Github Enterprise.
+1.  [x]  Deploy client application on GH pages.
+1.  [x]  Deploy server application on Heroku.
 
 ### Version Control
 Demonstrate using version control by:
-1.  [ ]  Sharing your work through a git repository hosted on Github.
+1.  [x]  Sharing your work through a git repository hosted on Github.
 1.  [ ]  Making frequent, cohesive commits dating back to the **first day**
 of the project week.
-1.  [ ]  1 commit on the first day of project week on both repos.
+1.  [x]  1 commit on the first day of project week on both repos.
 1.  [ ]  At least 1 commit every day during project week (not necessarily on both repos).
 
 ### Documentation
 Produce documentation on Github:
-1.  [ ] Create 2 Github repos (one for your front-end and one for your back-end)
-1.  [ ] Pin both repositories on GitHub as a Popular Repository
+1.  [x] Create 2 Github repos (one for your front-end and one for your back-end)
+1.  [x] Pin both repositories on GitHub as a Popular Repository
 
 Both front-end and back-end repos should include README's with:
 1.  [ ] An explanation of the what the app does and how it works.
@@ -40,12 +40,12 @@ Your back-end repo's README should also have
 1.  [ ] Set up and installation instructions for back end application
 
 ### Auth Specifications
-1.  [ ]  Signup with email, password, and password confirmation.
-1.  [ ]  Login with email and password.
-1.  [ ]  Logout when logged in.
-1.  [ ]  Change password with current and new password.
-1.  [ ]  Signup and Signin must only be available to not signed in users.
-1.  [ ]  Logout and Change password must only be available to signed in users.
+1.  [x]  Signup with email, password, and password confirmation.
+1.  [x]  Login with email and password.
+1.  [x]  Logout when logged in.
+1.  [x]  Change password with current and new password.
+1.  [x]  Signup and Signin must only be available to not signed in users.
+1.  [x]  Logout and Change password must only be available to signed in users.
 1.  [ ]  Give feedback to the user after each action's success or failure.
 1.  [ ]  All forms must clear after submit success and user sign-out
     - [ ] (Optional) Reset form to initial state on failure
@@ -64,10 +64,10 @@ Your back-end repo's README should also have
 1.  [ ] Protect against Cross-site Scripting
 
 ### API Specifications
-1.  [ ]  Use Express or Rails to build an API.
-1.  [ ]  Create at least 4 RESTful routes for handling GET, POST, PUT/PATCH, and DELETE requests for a resource other than User.
-1.  [ ]  Have at least 1 resource that has a relationship to User
-1.  [ ]  Any actions which change data must be authenticated and the data must be "owned" by the user performing the change or a user determined by an access control list
+1.  [x]  Use Express or Rails to build an API.
+1.  [x]  Create at least 4 RESTful routes for handling GET, POST, PUT/PATCH, and DELETE requests for a resource other than User.
+1.  [x]  Have at least 1 resource that has a relationship to User
+1.  [x]  Any actions which change data must be authenticated and the data must be "owned" by the user performing the change or a user determined by an access control list
 
 ### DO NOT!!
 Your app **must not**:
