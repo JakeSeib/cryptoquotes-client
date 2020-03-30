@@ -37,10 +37,10 @@ Client
 1.  [x] Change Password (curl/postman then web app)
 1.  [x] Sign Out (curl/postman then web app)
 1.  [ ] All API calls have success or failure messages
-1.  [ ] Create Quote (curl/postman then web app)
-1.  [ ] Get all Quotes (curl/postman then web app)
+1.  [x] Create Quote (curl/postman then web app)
+1.  [x] Get all Quotes (curl/postman then web app)
 1.  [ ] Delete single owned Quote (curl/postman then web app)
-1.  [ ] Update single owned Quote (curl/postman then web app)
+1.  [x] Update single owned Quote (curl/postman then web app)
 1.  [ ] Create a Solved_quote (curl/postman then web app)
    1.  [ ] Update state on letter guess
    1.  [ ] Check for solution after guess if no `null`s in currentGuess
