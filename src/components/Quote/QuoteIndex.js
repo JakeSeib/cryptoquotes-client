@@ -8,16 +8,13 @@ const QuoteIndex = function () {
 
   useEffect(() => {
     quoteIndex()
-      .then(res => {
-        console.log('res', res)
-        setQuotes(res.data.quotes)
-      })
+      .then(res => setQuotes(res.data.quotes))
       .catch(console.error)
   }, [])
 
   let quotesJSX
   if (!quotes) {
-    quotesJSX = <img src="https://i.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.webp"/>
+    quotesJSX = <p>Loading...</p>
   } else if (quotes.length === 0) {
     quotesJSX = 'No quotes yet'
   } else {

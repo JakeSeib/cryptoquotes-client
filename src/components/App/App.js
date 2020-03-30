@@ -10,6 +10,7 @@ import SignOut from '../Auth/SignOut'
 import ChangePassword from '../Auth/ChangePassword'
 import QuoteCreate from '../Quote/QuoteCreate'
 import QuoteIndex from '../Quote/QuoteIndex'
+import QuoteShow from '../Quote/QuoteShow'
 
 class App extends Component {
   constructor () {
@@ -60,7 +61,10 @@ class App extends Component {
             <AuthenticatedRoute user={user} path='/quotes/create' render={() => (
               <QuoteCreate msgAlert={this.msgAlert} user={user} />
             )} />
-            <Route path='/quotes' render={() => (
+            <AuthenticatedRoute user={user} path='/quotes/:id' render={({ match }) => (
+              <QuoteShow msgAlert={this.msgAlert} user={user} match={match} />
+            )} />
+            <AuthenticatedRoute user={user} path='/quotes' render={() => (
               <QuoteIndex msgAlert={this.msgAlert} user={user} />
             )} />
           </Switch>
