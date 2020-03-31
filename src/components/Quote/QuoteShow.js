@@ -30,7 +30,7 @@ const QuoteShow = ({ match, user, msgAlert }) => {
   } else if (isOwner) {
     showJSX = <QuoteEdit user={user} initQuote={quote} msgAlert={msgAlert} />
   } else {
-    showJSX = <h1>This where you will solve a Quote</h1>
+    showJSX = <QuoteSolve user={user} quote={quote} />
   }
   return showJSX
 }

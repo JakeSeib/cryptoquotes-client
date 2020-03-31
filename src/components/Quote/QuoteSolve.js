@@ -1,38 +1,35 @@
 import React, { useState, Fragment } from 'react'
 
+import quoteDisplay from './quoteDisplay'
 // import messages from '../AutoDismissAlert/messages'
 
 const QuoteSolve = ({ quote, user }) => {
-  const [guess, setGuess] = useState(null)
+  const [guess] = useState({
+    text: '',
+    author: ''
+  })
 
-  const formatString = function (string, cipher) {
-    // given a string, format for display using the provided cipher
-    const alpha = 'abcdefghijklmnopqrstuvwxyz'
-    const charSet = new Set(string.toLowerCase())
-    let formattedString = string.toLowerCase()
-    // take lowercased string, and for each unique character in the string,
-    // replace all instances in the string with the corresponding uppercased
-    // letter from the cipher, leaving non-alphabetical characters in place
-    charSet.forEach(char => {
-      const alphaIndex = [...alpha].findIndex(el => el === char)
-      if (alphaIndex > -1) {
-        const regex = new RegExp(`${char}`, 'g')
-        formattedString = formattedString.replace(regex, [...cipher][alphaIndex].toUpperCase())
-      }
-    })
-    return formattedString
-  }
+  quoteDisplay(quote)
 
-  const quoteDisplay = function (quoteObj) {
-    // given a Quote object with text, author, and cipher, adds properties for
-    // formatted text and formatted author using the cipher
-    const formattedQuote = {
-      formattedText: formatString(quoteObj.text, quoteObj.cipher),
-      formattedAuthor: '-' + formatString(quoteObj.author, quoteObj.cipher)
-    }
-    return Object.assign(quoteObj, formattedQuote)
-  }
+  const guessJSX = (
+    <Fragment>
+      <h2>{guess.text}</h2>
+      <p>{'- ' + guess.author}</p>
+    </Fragment>
+  )
+  const quoteJSX = (
+    <Fragment>
+      <h2>{quote.formattedText}</h2>
+      <p>{quote.formattedAuthor}</p>
+    </Fragment>
+  )
 
+  return (
+    <Fragment>
+      {guessJSX}
+      {quoteJSX}
+    </Fragment>
+  )
 }
 
 export default QuoteSolve
