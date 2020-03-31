@@ -27,6 +27,7 @@ Build an app that allows users to solve cryptograms without hassle or tedium.
 
 ## Stage 3: stretch goals
 - [Access Control List](https://en.wikipedia.org/wiki/Access-control_list) to only let certain users add quotes
+  - Add badge (https://react-bootstrap.github.io/components/badge/) to preferred users, including app creator
 - Play without logging in
 - Algorithmically-determined quote difficulties
 - Validation of quotes (have to be above certain size, contain some # of different letters)
@@ -37,3 +38,5 @@ Build an app that allows users to solve cryptograms without hassle or tedium.
   show overall performance metrics for a user
 - Get a hint: get currently highlighted letter for free
 - Better difficulty setting
+- Pagination for quotes (within each category- i.e. app, yours, others)
+- Save partial progress on quotes (potentially with componentWillUnmount)

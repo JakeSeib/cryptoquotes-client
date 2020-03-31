@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
+import Spinner from 'react-bootstrap/Spinner'
 
 import QuoteForm from './QuoteForm'
 import { quoteShow, quoteUpdate, quoteDelete } from '../../api/quote.js'
@@ -53,7 +54,11 @@ const QuoteShow = (props) => {
   if (redirect) {
     showJSX = redirect
   } else if (!quote) {
-    showJSX = <p>Loading...</p>
+    showJSX = (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    )
   } else if (isOwner === false) {
     showJSX = <p>Can only see owned quotes for now</p>
   } else {

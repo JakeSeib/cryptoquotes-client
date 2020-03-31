@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 const Home = (props) => {
   let homeJSX
   if (!props.user) {
-    homeJSX = <Redirect to='/sign-up' />
+    homeJSX = <Redirect to='/sign-in' />
   } else {
     homeJSX = (
       <Fragment>
