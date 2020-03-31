@@ -1,6 +1,6 @@
 const getChangeHandler = (attrGetter, attrSetter) =>
-  // returns an event handler with the provided state property getter and
-  // setter. State property should be an object
+  // returns an event handler with the provided state attribute getter and
+  // setter. State attribute should be an object
   function (event) {
     // create a new object with key of `name` property on input and
     // value with `value` property

@@ -8,7 +8,7 @@ import createDifficulty from './createDifficulty'
 import getChangeHandler from './getChangeHandler'
 import messages from '../AutoDismissAlert/messages'
 
-const QuoteCreate = (props) => {
+const QuoteCreate = ({ user, msgAlert }) => {
   const [quote, setQuote] = useState({ title: '', text: '', author: '' })
   const [redirect, setRedirect] = useState(null)
 
@@ -18,9 +18,9 @@ const QuoteCreate = (props) => {
     quote.cipher = createCipher()
     quote.difficulty = createDifficulty(quote)
 
-    quoteCreate(quote, props.user)
+    quoteCreate(quote, user)
       .then((res) => {
-        props.msgAlert({
+        msgAlert({
           heading: 'Successful Create',
           message: messages.createQuoteSuccess,
           variant: 'success'

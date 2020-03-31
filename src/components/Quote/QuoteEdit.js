@@ -7,8 +7,8 @@ import createDifficulty from './createDifficulty'
 import getChangeHandler from './getChangeHandler'
 import messages from '../AutoDismissAlert/messages'
 
-const QuoteEdit = (props) => {
-  const [quote, setQuote] = useState(props.initQuote)
+const QuoteEdit = ({ initQuote, user, msgAlert }) => {
+  const [quote, setQuote] = useState(initQuote)
   const [redirect, setRedirect] = useState(null)
 
   const handleSubmit = () => {
@@ -16,9 +16,9 @@ const QuoteEdit = (props) => {
 
     quote.difficulty = createDifficulty(quote)
 
-    quoteUpdate(quote, props.user)
+    quoteUpdate(quote, user)
       .then(res => setQuote(res.data.quote))
-      .then(() => props.msgAlert({
+      .then(() => msgAlert({
         heading: 'Successful Update',
         message: messages.updateQuoteSuccess,
         variant: 'success'
@@ -27,9 +27,9 @@ const QuoteEdit = (props) => {
   }
 
   const handleDelete = () => {
-    quoteDelete(quote, props.user)
+    quoteDelete(quote, user)
       .then(() => setRedirect(<Redirect to='/quotes' />))
-      .then(() => props.msgAlert({
+      .then(() => msgAlert({
         heading: 'Successful Delete',
         message: messages.deleteQuoteSuccess,
         variant: 'success'
