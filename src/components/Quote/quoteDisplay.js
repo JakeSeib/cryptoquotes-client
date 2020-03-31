@@ -2,6 +2,12 @@ const formatString = function (string, cipher) {
   // given a string, format for display using the provided cipher
   const alpha = 'abcdefghijklmnopqrstuvwxyz'
   const charSet = new Set(string.toLowerCase())
+  // filter out non-alphabetical characters
+  charSet.forEach(char => {
+    if (alpha.indexOf(char) < 0) {
+      charSet.delete(char)
+    }
+  })
   let formattedString = string.toLowerCase()
   // take lowercased string, and for each unique character in the string,
   // replace all instances in the string with the corresponding uppercased
