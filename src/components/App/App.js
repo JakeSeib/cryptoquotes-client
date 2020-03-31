@@ -11,6 +11,7 @@ import ChangePassword from '../Auth/ChangePassword'
 import QuoteCreate from '../Quote/QuoteCreate'
 import QuoteIndex from '../Quote/QuoteIndex'
 import QuoteShow from '../Quote/QuoteShow'
+import Home from '../Home'
 
 class App extends Component {
   constructor () {
@@ -66,6 +67,9 @@ class App extends Component {
             )} />
             <AuthenticatedRoute user={user} path='/quotes' render={() => (
               <QuoteIndex msgAlert={this.msgAlert} user={user} />
+            )} />
+            <Route path='/' render={() => (
+              <Home user={user} />
             )} />
           </Switch>
         </main>
