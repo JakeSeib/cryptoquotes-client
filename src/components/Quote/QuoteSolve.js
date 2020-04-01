@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 
 import quoteDisplay from './quoteDisplay'
+import { solvedQuoteCreate } from '../../api/solvedQuote.js'
+import messages from '../AutoDismissAlert/messages'
 import './QuoteSolve.scss'
 // import messages from '../AutoDismissAlert/messages'
 
@@ -17,7 +19,7 @@ function GuessHash (cipherSet) {
   })
 }
 
-const QuoteSolve = ({ quote, user }) => {
+const QuoteSolve = ({ quote, user, msgAlert }) => {
   quoteDisplay(quote)
   const [guess, setGuess] = useState({
     hash: new GuessHash(quote.cipherSet),
@@ -27,6 +29,19 @@ const QuoteSolve = ({ quote, user }) => {
   const [highlighted, setHighlighted] = useState(null)
   const alphaDisplay = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   alphaDisplay.push('clear')
+
+  useEffect(() => {
+    if (guess.text === quote.text.toLowerCase() &&
+    guess.author.slice() === quote.author.toLowerCase()) {
+      solvedQuoteCreate(quote, user)
+        .then(res => msgAlert({
+          heading: 'Solved!',
+          message: messages.quoteSolvedSuccess,
+          variant: 'success'
+        }))
+        .catch(console.error)
+    }
+  }, [guess])
 
   // todo: replace 'clear' text in alphaDisplay with a button with its own event handler
   const handleClear = cipherLetter => {
@@ -102,29 +117,55 @@ const QuoteSolve = ({ quote, user }) => {
   )
 
   const quoteTextJSX = (
-    <section className='quote-section'>
-      {quote.formattedText.split(' ').map((word, wordIndex) => (
-        <div key={`word-${wordIndex}`} className='solve-word'>
-          {[...word].map((letter, letterIndex) => (
-            <span
-              key={`letter-${wordIndex}-${letterIndex}`}
-              className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
-            >
-              <p
-                className={`guess-letter ${highlighted === letter ? 'highlight' : ''}`}
-                onClick={handleHighlight}
-                data-letter={letter}
+    <Fragment>
+      <section className='quote-section'>
+        {quote.formattedText.split(' ').map((word, wordIndex) => (
+          <div key={`word-${wordIndex}`} className='solve-word'>
+            {[...word].map((letter, letterIndex) => (
+              <span
+                key={`letter-${wordIndex}-${letterIndex}`}
+                className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
               >
-                {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
-              </p>
-              <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
-                {letter}
-              </p>
-            </span>
-          ))}
-        </div>
-      ))}
-    </section>
+                <p
+                  className={`guess-letter ${highlighted === letter ? 'highlight' : ''}`}
+                  onClick={handleHighlight}
+                  data-letter={letter}
+                >
+                  {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
+                </p>
+                <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
+                  {letter}
+                </p>
+              </span>
+            ))}
+          </div>
+        ))}
+      </section>
+      <section className='author-section'>
+        <p className='author-tick'>-</p>
+        {quote.formattedAuthor.split(' ').map((word, wordIndex) => (
+          <div key={`word-${wordIndex}`} className='solve-word'>
+            {[...word].map((letter, letterIndex) => (
+              <span
+                key={`letter-${wordIndex}-${letterIndex}`}
+                className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
+              >
+                <p
+                  className={`guess-letter ${highlighted === letter ? 'highlight' : ''}`}
+                  onClick={handleHighlight}
+                  data-letter={letter}
+                >
+                  {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
+                </p>
+                <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
+                  {letter}
+                </p>
+              </span>
+            ))}
+          </div>
+        ))}
+      </section>
+    </Fragment>
   )
 
   const letterDisplayJSX =

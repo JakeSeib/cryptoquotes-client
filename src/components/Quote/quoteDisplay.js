@@ -37,7 +37,7 @@ const quoteDisplay = function (quoteObj) {
   const formattedAuthor = formatString(quoteObj.author, quoteObj.cipher)
   const formattedQuote = {
     formattedText: formattedText.formattedString,
-    formattedAuthor: '-' + formattedAuthor.formattedString,
+    formattedAuthor: formattedAuthor.formattedString,
     cipherSet: union(formattedText.cipherSet, formattedAuthor.cipherSet)
   }
   return Object.assign(quoteObj, formattedQuote)
