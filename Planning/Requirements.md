@@ -20,24 +20,24 @@ Produce documentation on Github:
 1.  [x] Pin both repositories on GitHub as a Popular Repository
 
 Both front-end and back-end repos should include README's with:
-1.  [ ] An explanation of the what the app does and how it works.
-1.  [ ] Complete the repository `Description` field and `Website` field with a meaningful sentence description of the application and link to the live URL
+1.  [x] An explanation of the what the app does and how it works.
+1.  [x] Complete the repository `Description` field and `Website` field with a meaningful sentence description of the application and link to the live URL
 ![github image](https://git.generalassemb.ly/storage/user/3667/files/beae41ae-aaaa-11e7-8867-63958d376a0b)
-1.  [ ] A link to the other repo
-1.  [ ] A link to both deployed sites
-1.  [ ] List of technologies used
-1.  [ ] List unsolved problems which would be fixed in future iterations.
-1.  [ ] Document your planning, process and problem-solving strategy
+1.  [x] A link to the other repo
+1.  [x] A link to both deployed sites
+1.  [x] List of technologies used
+1.  [x] List unsolved problems which would be fixed in future iterations.
+1.  [x] Document your planning, process and problem-solving strategy
 
 Your front-end repo's README should also have:
-1.  [ ] Link to wireframes and user stories
-1.  [ ] An embedded screenshot of the app
-1.  [ ] Set up and installation instructions for front end application
+1.  [x] Link to wireframes and user stories
+1.  [x] An embedded screenshot of the app
+1.  [x] Set up and installation instructions for front end application
 
 Your back-end repo's README should also have
-1.  [ ] Link to Entity Relationship Diagram (ERD).
-1.  [ ] A catalog of routes (paths and methods) that the API expects.
-1.  [ ] Set up and installation instructions for back end application
+1.  [x] Link to Entity Relationship Diagram (ERD).
+1.  [x] A catalog of routes (paths and methods) that the API expects.
+1.  [x] Set up and installation instructions for back end application
 
 ### Auth Specifications
 1.  [x]  Signup with email, password, and password confirmation.
