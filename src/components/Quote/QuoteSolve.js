@@ -27,6 +27,7 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     author: quote.formattedAuthor
   })
   const [highlighted, setHighlighted] = useState(null)
+  const [solved, setSolved] = useState(false)
   const alphaDisplay = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   alphaDisplay.push('clear')
 
@@ -34,7 +35,8 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     if (guess.text === quote.text.toLowerCase() &&
     guess.author.slice() === quote.author.toLowerCase()) {
       solvedQuoteCreate(quote, user)
-        .then(res => msgAlert({
+        .then(() => setSolved(true))
+        .then(() => msgAlert({
           heading: 'Solved!',
           message: messages.quoteSolvedSuccess,
           variant: 'success'
@@ -116,54 +118,49 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     guess.hash[letter] ? guess.hash[letter].toUpperCase() : null
   )
 
+  const alertSolved = () => (
+    msgAlert({
+      heading: 'Already solved!',
+      message: messages.alertSolved,
+      variant: 'warning'
+    })
+  )
+
+  const quoteAttrToJSX = quoteArr => (
+    quoteArr.split(' ').map((word, wordIndex) => (
+      <div key={`word-${wordIndex}`} className='solve-word'>
+        {[...word].map((letter, letterIndex) => (
+          <span
+            key={`letter-${wordIndex}-${letterIndex}`}
+            className={`quote-letter ${(highlighted === letter) && !solved ? 'highlight' : ''}`}
+          >
+            <p
+              className={`guess-letter ${(highlighted === letter) && !solved ? 'highlight' : ''}`}
+              onClick={event => { solved ? alertSolved() : handleHighlight(event) }}
+              data-letter={letter}
+            >
+              {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
+            </p>
+            <p
+              className='solve-letter'
+              onClick={event => { solved ? alertSolved() : handleHighlight(event) }}
+              data-letter={letter}>
+              {letter}
+            </p>
+          </span>
+        ))}
+      </div>
+    ))
+  )
+
   const quoteTextJSX = (
     <Fragment>
       <section className='quote-section'>
-        {quote.formattedText.split(' ').map((word, wordIndex) => (
-          <div key={`word-${wordIndex}`} className='solve-word'>
-            {[...word].map((letter, letterIndex) => (
-              <span
-                key={`letter-${wordIndex}-${letterIndex}`}
-                className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
-              >
-                <p
-                  className={`guess-letter ${highlighted === letter ? 'highlight' : ''}`}
-                  onClick={handleHighlight}
-                  data-letter={letter}
-                >
-                  {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
-                </p>
-                <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
-                  {letter}
-                </p>
-              </span>
-            ))}
-          </div>
-        ))}
+        {quoteAttrToJSX(quote.formattedText)}
       </section>
       <section className='author-section'>
         <p className='author-tick'>-</p>
-        {quote.formattedAuthor.split(' ').map((word, wordIndex) => (
-          <div key={`word-${wordIndex}`} className='solve-word'>
-            {[...word].map((letter, letterIndex) => (
-              <span
-                key={`letter-${wordIndex}-${letterIndex}`}
-                className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
-              >
-                <p
-                  className={`guess-letter ${highlighted === letter ? 'highlight' : ''}`}
-                  onClick={handleHighlight}
-                  data-letter={letter}
-                >
-                  {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
-                </p>
-                <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
-                  {letter}
-                </p>
-              </span>
-            ))}
-          </div>
-        ))}
+        {quoteAttrToJSX(quote.formattedAuthor)}
       </section>
     </Fragment>
   )
@@ -171,7 +168,11 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
   const letterDisplayJSX =
     <section className='alpha-section'>
       {alphaDisplay.map(letter => (
-        <p key={letter} className='alpha-letter' data-letter={letter} onClick={handleGuess}>
+        <p
+          key={letter}
+          className='alpha-letter'
+          data-letter={letter}
+          onClick={event => { solved ? alertSolved() : handleGuess(event) }}>
           {letter}
         </p>
       ))}
