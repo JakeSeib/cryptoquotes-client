@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 const Home = (props) => {
   let homeJSX
@@ -9,6 +9,7 @@ const Home = (props) => {
     homeJSX = (
       <Fragment>
         <h4>Welcome to Cryptoquotes by Jake Seib</h4>
+        <Link to="/quotes">Browse Quotes</Link>
       </Fragment>
     )
   }

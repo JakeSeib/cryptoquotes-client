@@ -1,0 +1,52 @@
+$highlight-orange: #e6aa57;
+$bg-gray: #dadbe3;
+
+.solve-puzzle {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 3rem;
+}
+
+.quote-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.alpha-section {
+  align-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 5px 20vh;
+  text-align: center;
+}
+
+.solve-word {
+  display: inline-block;
+  font-size: 2em;
+  margin-bottom: 30px;
+  margin-right: 30px;
+}
+
+.alpha-letter {
+  font-size: 2em;
+  padding: 0 15px;
+}
+
+.quote-letter {
+  display: inline-block;
+  text-align: center;
+}
+
+.guess-letter {
+  background-color: $bg-gray;
+  display: block;
+  margin-bottom: 0;
+  padding: 0;
+  width: 1em;
+}
+
+.highlight {
+  background-color: $highlight-orange;
+}
