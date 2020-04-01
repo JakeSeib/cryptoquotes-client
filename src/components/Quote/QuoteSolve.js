@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 
 import quoteDisplay from './quoteDisplay'
+import { solvedQuoteCreate } from '../../api/solvedQuote.js'
+import messages from '../AutoDismissAlert/messages'
 import './QuoteSolve.scss'
 // import messages from '../AutoDismissAlert/messages'
 
@@ -17,7 +19,7 @@ function GuessHash (cipherSet) {
   })
 }
 
-const QuoteSolve = ({ quote, user }) => {
+const QuoteSolve = ({ quote, user, msgAlert }) => {
   quoteDisplay(quote)
   const [guess, setGuess] = useState({
     hash: new GuessHash(quote.cipherSet),
@@ -25,8 +27,23 @@ const QuoteSolve = ({ quote, user }) => {
     author: quote.formattedAuthor
   })
   const [highlighted, setHighlighted] = useState(null)
+  const [solved, setSolved] = useState(false)
   const alphaDisplay = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   alphaDisplay.push('clear')
+
+  useEffect(() => {
+    if (guess.text === quote.text.toLowerCase() &&
+    guess.author.slice() === quote.author.toLowerCase()) {
+      solvedQuoteCreate(quote, user)
+        .then(() => setSolved(true))
+        .then(() => msgAlert({
+          heading: 'Solved!',
+          message: messages.quoteSolvedSuccess,
+          variant: 'success'
+        }))
+        .catch(console.error)
+    }
+  }, [guess])
 
   // todo: replace 'clear' text in alphaDisplay with a button with its own event handler
   const handleClear = cipherLetter => {
@@ -101,36 +118,61 @@ const QuoteSolve = ({ quote, user }) => {
     guess.hash[letter] ? guess.hash[letter].toUpperCase() : null
   )
 
-  const quoteTextJSX = (
-    <section className='quote-section'>
-      {quote.formattedText.split(' ').map((word, wordIndex) => (
-        <div key={`word-${wordIndex}`} className='solve-word'>
-          {[...word].map((letter, letterIndex) => (
-            <span
-              key={`letter-${wordIndex}-${letterIndex}`}
-              className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
+  const alertSolved = () => (
+    msgAlert({
+      heading: 'Already solved!',
+      message: messages.alertSolved,
+      variant: 'warning'
+    })
+  )
+
+  const quoteAttrToJSX = quoteArr => (
+    quoteArr.split(' ').map((word, wordIndex) => (
+      <div key={`word-${wordIndex}`} className='solve-word'>
+        {[...word].map((letter, letterIndex) => (
+          <span
+            key={`letter-${wordIndex}-${letterIndex}`}
+            className={`quote-letter ${(highlighted === letter) && !solved ? 'highlight' : ''}`}
+          >
+            <p
+              className={`guess-letter ${(highlighted === letter) && !solved ? 'highlight' : ''}`}
+              onClick={event => { solved ? alertSolved() : handleHighlight(event) }}
+              data-letter={letter}
             >
-              <p
-                className={`guess-letter ${highlighted === letter ? 'highlight' : ''}`}
-                onClick={handleHighlight}
-                data-letter={letter}
-              >
-                {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
-              </p>
-              <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
-                {letter}
-              </p>
-            </span>
-          ))}
-        </div>
-      ))}
-    </section>
+              {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
+            </p>
+            <p
+              className='solve-letter'
+              onClick={event => { solved ? alertSolved() : handleHighlight(event) }}
+              data-letter={letter}>
+              {letter}
+            </p>
+          </span>
+        ))}
+      </div>
+    ))
+  )
+
+  const quoteTextJSX = (
+    <Fragment>
+      <section className='quote-section'>
+        {quoteAttrToJSX(quote.formattedText)}
+      </section>
+      <section className='author-section'>
+        <p className='author-tick'>-</p>
+        {quoteAttrToJSX(quote.formattedAuthor)}
+      </section>
+    </Fragment>
   )
 
   const letterDisplayJSX =
     <section className='alpha-section'>
       {alphaDisplay.map(letter => (
-        <p key={letter} className='alpha-letter' data-letter={letter} onClick={handleGuess}>
+        <p
+          key={letter}
+          className='alpha-letter'
+          data-letter={letter}
+          onClick={event => { solved ? alertSolved() : handleGuess(event) }}>
           {letter}
         </p>
       ))}

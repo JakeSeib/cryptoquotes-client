@@ -13,6 +13,11 @@ $bg-gray: #dadbe3;
   justify-content: center;
 }
 
+.author-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .alpha-section {
   align-content: space-between;
   display: flex;
@@ -49,4 +54,10 @@ $bg-gray: #dadbe3;
 
 .highlight {
   background-color: $highlight-orange;
+}
+
+.author-tick {
+  display: inline;
+  font-size: 2em;
+  padding: 0 2px;
 }

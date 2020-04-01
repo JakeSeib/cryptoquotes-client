@@ -8,5 +8,7 @@ export default {
   changePasswordFailure: 'Failed to change passwords. Check your old password and try again.',
   createQuoteSuccess: 'Successfully created quote',
   updateQuoteSuccess: 'Successfully updated quote',
-  deleteQuoteSuccess: 'Successfully deleted quote'
+  deleteQuoteSuccess: 'Successfully deleted quote',
+  quoteSolvedSuccess: 'Quote successfully deciphered!',
+  alertSolved: 'Quote has already been solved'
 }

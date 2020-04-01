@@ -1,15 +1,25 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
+import QuoteCard from './QuoteCard'
 import { quoteIndex } from '../../api/quote.js'
+import { solvedQuoteIndex } from '../../api/solvedQuote.js'
 
-const QuoteIndex = function () {
+const QuoteIndex = function ({ user }) {
   const [quotes, setQuotes] = useState(null)
+  const [solvedQuotes, setSolvedQuotes] = useState([])
 
   useEffect(() => {
     quoteIndex()
       .then(res => setQuotes(res.data.quotes))
+      .catch(console.error)
+  }, [])
+
+  useEffect(() => {
+    solvedQuoteIndex(user)
+      .then(res => {
+        setSolvedQuotes(res.data.solved_quotes)
+      })
       .catch(console.error)
   }, [])
 
@@ -25,7 +35,7 @@ const QuoteIndex = function () {
   } else {
     quotesJSX = quotes.map(quote => (
       <li key={quote.id}>
-        <Link to={`/quotes/${quote.id}`}>{quote.title}</Link>
+        <QuoteCard quote={quote} solved={solvedQuotes.find(sQ => sQ.quote.id === quote.id)} />
       </li>
     ))
   }
@@ -35,6 +45,7 @@ const QuoteIndex = function () {
       <h4>Quotes</h4>
       <ul>
         {quotesJSX}
+        {solvedQuotes ? 'got solved quotes' : 'no solved quotes'}
       </ul>
     </Fragment>
   )
