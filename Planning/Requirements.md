@@ -55,9 +55,9 @@ Your back-end repo's README should also have
 1.  [ ] Have semantically clean HTML and CSS
 1.  [x] User must be able to create a new resource
 1.  [x] User must be able to update a resource
-1.  [ ] User must be able to delete a resource
+1.  [x] User must be able to delete a resource
 1.  [x] User must be able to view a single or multiple resource(s)
-1.  [ ] All resource actions that change data must only be available to a signed in user.
+1.  [x] All resource actions that change data must only be available to a signed in user.
 1.  [ ] Give feedback to the user after each action's success or failure.
 1.  [ ] All forms must clear after submit success
     - [ ] (Optional) Reset form to initial state on failure
