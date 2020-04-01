@@ -5,8 +5,9 @@
   margin-bottom: 30px;
 }
 
-.solve-letter {
+.quote-letter {
   padding: 0 2px;
+  display: inline-block;
 }
 
 .solve-puzzle {
@@ -17,4 +18,9 @@
 
 .highlight {
   background-color: #e6aa57;
+}
+
+.guess-letter {
+  display: block;
+  margin-bottom: 0;
 }

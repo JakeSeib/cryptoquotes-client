@@ -9,8 +9,8 @@ import './QuoteSolve.scss'
 // letters denote either the solution text or the user's current guess at the
 // solution text
 
-function GuessHash (charSet) {
-  charSet.forEach(char => {
+function GuessHash (cipherSet) {
+  cipherSet.forEach(char => {
     this[char] = null
   })
 }
@@ -18,7 +18,7 @@ function GuessHash (charSet) {
 const QuoteSolve = ({ quote, user }) => {
   quoteDisplay(quote)
   const [guess, setGuess] = useState({
-    hash: new GuessHash(quote.charSet),
+    hash: new GuessHash(quote.cipherSet),
     text: quote.formattedText,
     author: quote.formattedAuthor
   })
@@ -63,7 +63,10 @@ const QuoteSolve = ({ quote, user }) => {
   }
 
   const handleHighlight = (event) => {
-    setHighlighted(event.target.getAttribute('data-letter'))
+    const letter = event.target.getAttribute('data-letter')
+    if (quote.cipherSet.has(letter)) {
+      setHighlighted(letter)
+    }
   }
 
   const quoteTextJSX =
@@ -72,10 +75,15 @@ const QuoteSolve = ({ quote, user }) => {
         {[...word].map((letter, letterIndex) => (
           <span
             key={`letter-${wordIndex}-${letterIndex}`}
-            onClick={handleHighlight}
-            className={`solve-letter ${highlighted === letter ? 'highlight' : ''}`}
-            data-letter={letter}
-          >{letter}</span>
+            className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
+          >
+            <p className='guess-letter' onClick={handleHighlight} data-letter={letter}>
+              {guess.hash[letter] || quote.cipherSet.has(letter) ? '_' : letter}
+            </p>
+            <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
+              {letter}
+            </p>
+          </span>
         ))}
       </div>
     ))

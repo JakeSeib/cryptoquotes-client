@@ -3,23 +3,23 @@ const formatString = function (string, cipher) {
   // set of alphabetical characters in string
   const alpha = 'abcdefghijklmnopqrstuvwxyz'
   const charSet = new Set(string.toLowerCase())
+  const cipherSet = new Set()
   let formattedString = string.toLowerCase()
   // filter out non-alphabetical characters
 
   // for alphabetical characters, replace all instances in the string with the
   // corresponding uppercased letter from the cipher, leaving non-alphabetical
-  // characters in place
+  // characters in place, & add the uppercased letter from the cipher to its set
   charSet.forEach(char => {
     const alphaIndex = alpha.indexOf(char)
-    if (alphaIndex < 0) {
-      charSet.delete(char)
-    } else {
-      const regex = new RegExp(`${char}`, 'g')
-      formattedString = formattedString.replace(regex, [...cipher][alphaIndex].toUpperCase())
+    if (alphaIndex >= 0) {
+      const cipherLetter = [...cipher][alphaIndex].toUpperCase()
+      cipherSet.add(cipherLetter)
+      formattedString = formattedString.replace(new RegExp(`${char}`, 'g'), cipherLetter)
     }
   })
 
-  return { formattedString, charSet }
+  return { formattedString, cipherSet }
 }
 
 function union (setA, setB) {
@@ -38,7 +38,7 @@ const quoteDisplay = function (quoteObj) {
   const formattedQuote = {
     formattedText: formattedText.formattedString,
     formattedAuthor: '-' + formattedAuthor.formattedString,
-    charSet: union(formattedText.charSet, formattedAuthor.charSet)
+    cipherSet: union(formattedText.cipherSet, formattedAuthor.cipherSet)
   }
   return Object.assign(quoteObj, formattedQuote)
 }
