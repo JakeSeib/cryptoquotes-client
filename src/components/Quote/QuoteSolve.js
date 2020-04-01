@@ -7,7 +7,9 @@ import './QuoteSolve.scss'
 // NOTE:
 // convention is that uppercased letters denote encoded letters, lowercased
 // letters denote either the solution text or the user's current guess at the
-// solution text
+// solution text.
+// this convention is used in handleGuess when swapping two guesses to maintain
+// consistency for the user's current guess
 
 function GuessHash (cipherSet) {
   cipherSet.forEach(char => {
@@ -23,19 +25,45 @@ const QuoteSolve = ({ quote, user }) => {
     author: quote.formattedAuthor
   })
   const [highlighted, setHighlighted] = useState(null)
+  const alphaDisplay = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  alphaDisplay.push('clear')
 
-  // set up individual elements for each letter
-  // those individual elements show the current guess above the formatted letter
+  // todo: replace 'clear' text in alphaDisplay with a button with its own event handler
+  const handleClear = cipherLetter => {
+    const clearedLetter = guess.hash[cipherLetter]
+    const updatedGuess = {
+      hash: { ...guess.hash },
+      text: guess.text.slice(),
+      author: guess.author.slice()
+    }
+    updatedGuess.text = updatedGuess.text.replace(new RegExp(`${clearedLetter}`, 'g'), cipherLetter)
+    updatedGuess.author = updatedGuess.author.replace(new RegExp(`${clearedLetter}`, 'g'), cipherLetter)
+    updatedGuess.hash[cipherLetter] = null
+    setGuess(updatedGuess)
+  }
 
-  // set event listeners onClick/onType for alphabetical letters
-  // onClick/onType checks the formattedText/Author letter of that element and uses
-  // that as the key to update guessedLetters (as cipherLetter)
-
-  const handleGuess = (cipherLetter, newGuess) => {
-    newGuess = newGuess.toLowerCase()
+  const handleGuess = (event) => {
+    let cipherLetter
+    if (highlighted) {
+      cipherLetter = highlighted
+    } else {
+      // todo: handle guessing when no letter highlighted
+      return
+    }
+    const newGuess = event.target.getAttribute('data-letter').toLowerCase()
+    if (newGuess === 'clear') {
+      if (guess.hash[cipherLetter]) {
+        return handleClear(cipherLetter)
+      }
+      return
+    }
     const oldGuess = guess.hash[cipherLetter]
     const oldCipherPair = Object.entries(guess.hash).find(pair => pair[1] === newGuess)
-    const updatedGuess = { ...guess }
+    const updatedGuess = {
+      hash: { ...guess.hash },
+      text: guess.text.slice(),
+      author: guess.author.slice()
+    }
     // newGuess was previously guessed elsewhere
     if (oldCipherPair) {
       // newGuess was previously guessed elsewhere & cipherLetter had a previous guess
@@ -69,30 +97,49 @@ const QuoteSolve = ({ quote, user }) => {
     }
   }
 
-  const quoteTextJSX =
-    quote.formattedText.split(' ').map((word, wordIndex) => (
-      <div key={`word-${wordIndex}`} className='solve-word'>
-        {[...word].map((letter, letterIndex) => (
-          <span
-            key={`letter-${wordIndex}-${letterIndex}`}
-            className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
-          >
-            <p className='guess-letter' onClick={handleHighlight} data-letter={letter}>
-              {guess.hash[letter] || quote.cipherSet.has(letter) ? '_' : letter}
-            </p>
-            <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
-              {letter}
-            </p>
-          </span>
-        ))}
-      </div>
-    ))
+  const displayGuessLetter = letter => (
+    guess.hash[letter] ? guess.hash[letter].toUpperCase() : null
+  )
+
+  const quoteTextJSX = (
+    <section className='quote-section'>
+      {quote.formattedText.split(' ').map((word, wordIndex) => (
+        <div key={`word-${wordIndex}`} className='solve-word'>
+          {[...word].map((letter, letterIndex) => (
+            <span
+              key={`letter-${wordIndex}-${letterIndex}`}
+              className={`quote-letter ${highlighted === letter ? 'highlight' : ''}`}
+            >
+              <p
+                className={`guess-letter ${highlighted === letter ? 'highlight' : ''}`}
+                onClick={handleHighlight}
+                data-letter={letter}
+              >
+                {displayGuessLetter(letter) || (quote.cipherSet.has(letter) ? '_' : letter)}
+              </p>
+              <p className='solve-letter' onClick={handleHighlight} data-letter={letter}>
+                {letter}
+              </p>
+            </span>
+          ))}
+        </div>
+      ))}
+    </section>
+  )
+
+  const letterDisplayJSX =
+    <section className='alpha-section'>
+      {alphaDisplay.map(letter => (
+        <p key={letter} className='alpha-letter' data-letter={letter} onClick={handleGuess}>
+          {letter}
+        </p>
+      ))}
+    </section>
 
   return (
     <section className='solve-puzzle'>
       {quoteTextJSX}
-      <p>{guess.text}</p>
-      <button onClick={handleGuess}>DONT CLICK</button>
+      {letterDisplayJSX}
     </section>
   )
 }
