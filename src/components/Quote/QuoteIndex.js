@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
+import QuoteCard from './QuoteCard'
 import { quoteIndex } from '../../api/quote.js'
 import { solvedQuoteIndex } from '../../api/solvedQuote.js'
 
@@ -35,8 +35,7 @@ const QuoteIndex = function ({ user }) {
   } else {
     quotesJSX = quotes.map(quote => (
       <li key={quote.id}>
-        <Link to={`/quotes/${quote.id}`}>{quote.title}</Link>
-        <p>{solvedQuotes.find(sQ => sQ.quote.id === quote.id) ? 'Solved!' : false}</p>
+        <QuoteCard quote={quote} solved={solvedQuotes.find(sQ => sQ.quote.id === quote.id)} />
       </li>
     ))
   }
