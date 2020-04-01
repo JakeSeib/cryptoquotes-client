@@ -17,11 +17,12 @@ function GuessHash (charSet) {
 
 const QuoteSolve = ({ quote, user }) => {
   quoteDisplay(quote)
-  const [guessHash, setGuessHash] = useState(new GuessHash(quote.charSet))
-  const [guessQuote, setGuessQuote] = useState({
+  const [guess, setGuess] = useState({
+    hash: new GuessHash(quote.charSet),
     text: quote.formattedText,
     author: quote.formattedAuthor
   })
+  const [highlighted, setHighlighted] = useState(null)
 
   // set up individual elements for each letter
   // those individual elements show the current guess above the formatted letter
@@ -32,42 +33,49 @@ const QuoteSolve = ({ quote, user }) => {
 
   const handleGuess = (cipherLetter, newGuess) => {
     newGuess = newGuess.toLowerCase()
-    const oldGuess = guessHash[cipherLetter]
-    const oldCipherPair = Object.entries(guessHash).find(pair => pair[1] === newGuess)
-    const newGuessQuote = { ...guessQuote }
-    const newGuessHash = { ...guessHash }
+    const oldGuess = guess.hash[cipherLetter]
+    const oldCipherPair = Object.entries(guess.hash).find(pair => pair[1] === newGuess)
+    const updatedGuess = { ...guess }
     // newGuess was previously guessed elsewhere
     if (oldCipherPair) {
       // newGuess was previously guessed elsewhere & cipherLetter had a previous guess
       if (oldGuess) {
-        newGuessQuote.text = newGuessQuote.text.replace(new RegExp(`${oldGuess}`, 'g'), cipherLetter)
-        newGuessQuote.author = newGuessQuote.author.replace(new RegExp(`${oldGuess}`, 'g'), cipherLetter)
-        newGuessQuote.text = newGuessQuote.text.replace(new RegExp(`${newGuess}`, 'g'), oldGuess)
-        newGuessQuote.author = newGuessQuote.author.replace(new RegExp(`${newGuess}`, 'g'), oldGuess)
-        newGuessHash[oldCipherPair[0]] = oldGuess
+        updatedGuess.text = updatedGuess.text.replace(new RegExp(`${oldGuess}`, 'g'), cipherLetter)
+        updatedGuess.author = updatedGuess.author.replace(new RegExp(`${oldGuess}`, 'g'), cipherLetter)
+        updatedGuess.text = updatedGuess.text.replace(new RegExp(`${newGuess}`, 'g'), oldGuess)
+        updatedGuess.author = updatedGuess.author.replace(new RegExp(`${newGuess}`, 'g'), oldGuess)
+        updatedGuess.hash[oldCipherPair[0]] = oldGuess
       } else {
-        newGuessQuote.text = newGuessQuote.text.replace(new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
-        newGuessQuote.author = newGuessQuote.author.replace(new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
-        newGuessHash[oldCipherPair[0]] = null
+        updatedGuess.text = updatedGuess.text.replace(new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
+        updatedGuess.author = updatedGuess.author.replace(new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
+        updatedGuess.hash[oldCipherPair[0]] = null
       }
       // cipherLetter had a previous guess
     } else if (oldGuess) {
-      newGuessQuote.text = newGuessQuote.text.replace(new RegExp(`${oldGuess}`, 'g'), newGuess)
-      newGuessQuote.author = newGuessQuote.author.replace(new RegExp(`${oldGuess}`, 'g'), newGuess)
+      updatedGuess.text = updatedGuess.text.replace(new RegExp(`${oldGuess}`, 'g'), newGuess)
+      updatedGuess.author = updatedGuess.author.replace(new RegExp(`${oldGuess}`, 'g'), newGuess)
     }
     // base case
-    newGuessQuote.text = newGuessQuote.text.replace(new RegExp(`${cipherLetter}`, 'g'), newGuess)
-    newGuessQuote.author = newGuessQuote.author.replace(new RegExp(`${cipherLetter}`, 'g'), newGuess)
-    newGuessHash[cipherLetter] = newGuess
-    setGuessHash(newGuessHash)
-    setGuessQuote(newGuessQuote)
+    updatedGuess.text = updatedGuess.text.replace(new RegExp(`${cipherLetter}`, 'g'), newGuess)
+    updatedGuess.author = updatedGuess.author.replace(new RegExp(`${cipherLetter}`, 'g'), newGuess)
+    updatedGuess.hash[cipherLetter] = newGuess
+    setGuess(updatedGuess)
+  }
+
+  const handleHighlight = (event) => {
+    setHighlighted(event.target.getAttribute('data-letter'))
   }
 
   const quoteTextJSX =
     quote.formattedText.split(' ').map((word, wordIndex) => (
       <div key={`word-${wordIndex}`} className='solve-word'>
         {[...word].map((letter, letterIndex) => (
-          <span key={`letter-${wordIndex}-${letterIndex}`} className='solve-letter'>{letter}</span>
+          <span
+            key={`letter-${wordIndex}-${letterIndex}`}
+            onClick={handleHighlight}
+            className={`solve-letter ${highlighted === letter ? 'highlight' : ''}`}
+            data-letter={letter}
+          >{letter}</span>
         ))}
       </div>
     ))
@@ -75,7 +83,8 @@ const QuoteSolve = ({ quote, user }) => {
   return (
     <section className='solve-puzzle'>
       {quoteTextJSX}
-      <p>{guessQuote.text}</p>
+      <p>{guess.text}</p>
+      <button onClick={handleGuess}>DONT CLICK</button>
     </section>
   )
 }
