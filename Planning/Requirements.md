@@ -61,7 +61,7 @@ Your back-end repo's README should also have
 1.  [ ] Give feedback to the user after each action's success or failure.
 1.  [ ] All forms must clear after submit success
     - [ ] (Optional) Reset form to initial state on failure
-1.  [ ] Protect against Cross-site Scripting
+1.  [x] Protect against Cross-site Scripting
 
 ### API Specifications
 1.  [x]  Use Express or Rails to build an API.
