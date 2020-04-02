@@ -8,7 +8,6 @@ import messages from '../AutoDismissAlert/messages'
 
 const QuoteShow = ({ match, user, msgAlert }) => {
   // view should either be solve or edit, depending upon ownership
-  // for now, only do edit
   const [quote, setQuote] = useState(null)
   const [isOwner, setIsOwner] = useState(null)
 

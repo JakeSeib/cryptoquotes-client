@@ -7,9 +7,6 @@ import { solvedQuoteIndex } from '../../api/solvedQuote.js'
 import messages from '../AutoDismissAlert/messages'
 import './css/QuoteIndex.scss'
 
-// todo: add other data to index & solve view (difficulty, creator's name, title)
-// make QuoteCard actually render something nice
-
 const QuoteIndex = function ({ user, msgAlert }) {
   const [quotes, setQuotes] = useState(null)
   const [solvedQuotes, setSolvedQuotes] = useState([])
@@ -42,6 +39,33 @@ const QuoteIndex = function ({ user, msgAlert }) {
       })
   }, [])
 
+  const categorized = {
+    app: [],
+    currentUser: [],
+    otherUsers: []
+  }
+
+  // sort quotes into categories for App-provided (using hard-coded id of
+  // designted "Site Owner" user), owned by current user, or owned by other users
+  const idBuckets = [
+    { id: 1, category: 'app' },
+    { id: user.id, category: 'currentUser' }
+  ]
+  if (quotes) {
+    quotes.forEach(quote => {
+      const bucket = idBuckets.find(obj => obj.id === quote.user.id)
+      bucket ? categorized[bucket.category].push(quote) : categorized.otherUsers.push(quote)
+    })
+  }
+
+  const makeQuoteCards = quotes => (
+    quotes.map(quote => (
+      <li key={quote.id}>
+        <QuoteCard quote={quote} solved={solvedQuotes.find(sQ => sQ.quote.id === quote.id)} />
+      </li>
+    ))
+  )
+
   let quotesJSX
   if (!quotes) {
     quotesJSX = (
@@ -52,19 +76,28 @@ const QuoteIndex = function ({ user, msgAlert }) {
   } else if (quotes.length === 0) {
     quotesJSX = 'No quotes!'
   } else {
-    quotesJSX = quotes.map(quote => (
-      <li key={quote.id}>
-        <QuoteCard quote={quote} solved={solvedQuotes.find(sQ => sQ.quote.id === quote.id)} />
-      </li>
-    ))
+    quotesJSX = (
+      <Fragment>
+        <h4>App-Provided Quotes</h4>
+        <ul className='quote-ul'>
+          {makeQuoteCards(categorized.app)}
+        </ul>
+        <h4>Your Quotes</h4>
+        <ul className='quote-ul'>
+          {makeQuoteCards(categorized.currentUser)}
+        </ul>
+        <h4>Other Users Quotes</h4>
+        <ul className='quote-ul'>
+          {makeQuoteCards(categorized.otherUsers)}
+        </ul>
+      </Fragment>
+    )
   }
 
   return (
     <Fragment>
-      <h4>Quotes</h4>
-      <ul className='quote-ul'>
-        {quotesJSX}
-      </ul>
+      <h3>Quotes</h3>
+      {quotesJSX}
     </Fragment>
   )
 }
