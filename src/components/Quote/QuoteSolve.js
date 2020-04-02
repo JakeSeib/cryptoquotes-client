@@ -41,7 +41,13 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
           message: messages.quoteSolvedSuccess,
           variant: 'success'
         }))
-        .catch(console.error)
+        .catch(error => {
+          msgAlert({
+            heading: 'Solution reached, but save failed with error: ' + error.message,
+            message: messages.solvedQuoteCreateFailure,
+            variant: 'danger'
+          })
+        })
     }
   }, [guess])
 
@@ -62,9 +68,15 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     guess.author = guess.author.replace(regex, replacement)
   }
 
-  // todo: replace 'clear' text in alphaDisplay with a button with its own event handler
   const handleClear = cipherLetter => {
     const clearedLetter = guess.hash[cipherLetter]
+    if (!clearedLetter) {
+      return msgAlert({
+        heading: 'Nothing to clear',
+        message: messages.alertNullSelected,
+        variant: 'warning'
+      })
+    }
     const updatedGuess = {
       hash: { ...guess.hash },
       text: guess.text.slice(),
@@ -80,15 +92,15 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     if (highlighted) {
       cipherLetter = highlighted
     } else {
-      // todo: handle guessing when no letter highlighted
-      return
+      return msgAlert({
+        heading: 'Nothing selected',
+        message: messages.alertNoHighlight,
+        variant: 'warning'
+      })
     }
     const newGuess = event.target.getAttribute('data-letter').toLowerCase()
     if (newGuess === 'clear') {
-      if (guess.hash[cipherLetter]) {
-        return handleClear(cipherLetter)
-      }
-      return
+      return handleClear(cipherLetter)
     }
     const oldGuess = guess.hash[cipherLetter]
     const oldCipherPair = Object.entries(guess.hash).find(pair => pair[1] === newGuess)
@@ -169,7 +181,7 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
       {alphaDisplay.map(letter => (
         <p
           key={letter}
-          className='alpha-letter'
+          className={`alpha-letter ${Object.values(guess.hash).includes(letter.toLowerCase()) ? 'highlight' : ''}`}
           data-letter={letter}
           onClick={event => { solved ? alertSolved() : handleGuess(event) }}>
           {letter}
