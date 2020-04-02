@@ -6,6 +6,7 @@ import { quoteUpdate, quoteDelete } from '../../api/quote.js'
 import createDifficulty from './createDifficulty'
 import getChangeHandler from './getChangeHandler'
 import messages from '../AutoDismissAlert/messages'
+import './css/QuoteEdit.scss'
 
 const QuoteEdit = ({ initQuote, user, msgAlert }) => {
   const [quote, setQuote] = useState(initQuote)
@@ -55,7 +56,7 @@ const QuoteEdit = ({ initQuote, user, msgAlert }) => {
   } else {
     editJSX = (
       <Fragment>
-        <h1>Edit your Quote</h1>
+        <h3>Edit your Quote</h3>
         <QuoteForm
           quote={quote}
           handleSubmit={handleSubmit}

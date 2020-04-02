@@ -54,7 +54,7 @@ const QuoteCreate = ({ user, msgAlert }) => {
   } else {
     createJSX = (
       <Fragment>
-        <h1>Create a Quote</h1>
+        <h3>Create a Quote</h3>
         <QuoteForm
           quote={quote}
           handleSubmit={handleSubmit}

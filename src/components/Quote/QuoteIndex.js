@@ -5,7 +5,7 @@ import QuoteCard from './QuoteCard'
 import { quoteIndex } from '../../api/quote.js'
 import { solvedQuoteIndex } from '../../api/solvedQuote.js'
 import messages from '../AutoDismissAlert/messages'
-import './QuoteIndex.scss'
+import './css/QuoteIndex.scss'
 
 // todo: add other data to index & solve view (difficulty, creator's name, title)
 // make QuoteCard actually render something nice

@@ -60,6 +60,7 @@ Client
 1.  [ ] Show counts for each scrambled letter
 1.  [x] Swap logic for guessing a previously-guessed letter
 1.  [ ] On guess, swap active input to the next spot to allow for easy typing
+   1.  [ ] Have special darker highlighting to show currently selected spot in addition to selected letter
 1.  [x] Show alphabet with currently guessed letters indicated
    1.  [x] Make alphabet letters clickable
 1.  [ ] Browse view has quotes categorized as default (i.e. provided by the app), created by User, and created by other Users

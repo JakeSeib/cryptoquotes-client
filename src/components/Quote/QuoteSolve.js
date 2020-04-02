@@ -3,7 +3,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import quoteDisplay from './quoteDisplay'
 import { solvedQuoteCreate } from '../../api/solvedQuote.js'
 import messages from '../AutoDismissAlert/messages'
-import './QuoteSolve.scss'
+import './css/QuoteSolve.scss'
 // import messages from '../AutoDismissAlert/messages'
 
 // NOTE:
@@ -191,7 +191,7 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
 
   return (
     <section className='solve-puzzle'>
-      <h2>{quote.title} by {quote.user.name}</h2>
+      <h3>{quote.title} by {quote.user.name}</h3>
       {quoteTextJSX}
       {letterDisplayJSX}
     </section>
