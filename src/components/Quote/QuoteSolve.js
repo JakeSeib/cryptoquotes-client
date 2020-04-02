@@ -45,6 +45,23 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     }
   }, [guess])
 
+  const displayGuessLetter = letter => (
+    guess.hash[letter] ? guess.hash[letter].toUpperCase() : null
+  )
+
+  const alertSolved = () => (
+    msgAlert({
+      heading: 'Already solved!',
+      message: messages.alertSolved,
+      variant: 'warning'
+    })
+  )
+
+  const updateWithRegex = (guess, regex, replacement) => {
+    guess.text = guess.text.replace(regex, replacement)
+    guess.author = guess.author.replace(regex, replacement)
+  }
+
   // todo: replace 'clear' text in alphaDisplay with a button with its own event handler
   const handleClear = cipherLetter => {
     const clearedLetter = guess.hash[cipherLetter]
@@ -53,8 +70,7 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
       text: guess.text.slice(),
       author: guess.author.slice()
     }
-    updatedGuess.text = updatedGuess.text.replace(new RegExp(`${clearedLetter}`, 'g'), cipherLetter)
-    updatedGuess.author = updatedGuess.author.replace(new RegExp(`${clearedLetter}`, 'g'), cipherLetter)
+    updateWithRegex(updatedGuess, new RegExp(`${clearedLetter}`, 'g'), cipherLetter)
     updatedGuess.hash[cipherLetter] = null
     setGuess(updatedGuess)
   }
@@ -85,24 +101,19 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     if (oldCipherPair) {
       // newGuess was previously guessed elsewhere & cipherLetter had a previous guess
       if (oldGuess) {
-        updatedGuess.text = updatedGuess.text.replace(new RegExp(`${oldGuess}`, 'g'), cipherLetter)
-        updatedGuess.author = updatedGuess.author.replace(new RegExp(`${oldGuess}`, 'g'), cipherLetter)
-        updatedGuess.text = updatedGuess.text.replace(new RegExp(`${newGuess}`, 'g'), oldGuess)
-        updatedGuess.author = updatedGuess.author.replace(new RegExp(`${newGuess}`, 'g'), oldGuess)
+        updateWithRegex(updatedGuess, new RegExp(`${oldGuess}`, 'g'), cipherLetter)
+        updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldGuess)
         updatedGuess.hash[oldCipherPair[0]] = oldGuess
       } else {
-        updatedGuess.text = updatedGuess.text.replace(new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
-        updatedGuess.author = updatedGuess.author.replace(new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
+        updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
         updatedGuess.hash[oldCipherPair[0]] = null
       }
       // cipherLetter had a previous guess
     } else if (oldGuess) {
-      updatedGuess.text = updatedGuess.text.replace(new RegExp(`${oldGuess}`, 'g'), newGuess)
-      updatedGuess.author = updatedGuess.author.replace(new RegExp(`${oldGuess}`, 'g'), newGuess)
+      updateWithRegex(updatedGuess, new RegExp(`${oldGuess}`, 'g'), newGuess)
     }
     // base case
-    updatedGuess.text = updatedGuess.text.replace(new RegExp(`${cipherLetter}`, 'g'), newGuess)
-    updatedGuess.author = updatedGuess.author.replace(new RegExp(`${cipherLetter}`, 'g'), newGuess)
+    updateWithRegex(updatedGuess, new RegExp(`${cipherLetter}`, 'g'), newGuess)
     updatedGuess.hash[cipherLetter] = newGuess
     setGuess(updatedGuess)
   }
@@ -113,18 +124,6 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
       setHighlighted(letter)
     }
   }
-
-  const displayGuessLetter = letter => (
-    guess.hash[letter] ? guess.hash[letter].toUpperCase() : null
-  )
-
-  const alertSolved = () => (
-    msgAlert({
-      heading: 'Already solved!',
-      message: messages.alertSolved,
-      variant: 'warning'
-    })
-  )
 
   const quoteAttrToJSX = quoteArr => (
     quoteArr.split(' ').map((word, wordIndex) => (
@@ -180,6 +179,7 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
 
   return (
     <section className='solve-puzzle'>
+      <h2>{quote.title} by {quote.user.name}</h2>
       {quoteTextJSX}
       {letterDisplayJSX}
     </section>
