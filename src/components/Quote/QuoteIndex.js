@@ -4,6 +4,10 @@ import Spinner from 'react-bootstrap/Spinner'
 import QuoteCard from './QuoteCard'
 import { quoteIndex } from '../../api/quote.js'
 import { solvedQuoteIndex } from '../../api/solvedQuote.js'
+import './QuoteIndex.scss'
+
+// todo: add other data to index & solve view (difficulty, creator's name, title)
+// make QuoteCard actually render something nice
 
 const QuoteIndex = function ({ user }) {
   const [quotes, setQuotes] = useState(null)
@@ -43,9 +47,8 @@ const QuoteIndex = function ({ user }) {
   return (
     <Fragment>
       <h4>Quotes</h4>
-      <ul>
+      <ul className='quote-ul'>
         {quotesJSX}
-        {solvedQuotes ? 'got solved quotes' : 'no solved quotes'}
       </ul>
     </Fragment>
   )

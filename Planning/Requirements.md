@@ -12,7 +12,7 @@ Demonstrate using version control by:
 1.  [ ]  Making frequent, cohesive commits dating back to the **first day**
 of the project week.
 1.  [x]  1 commit on the first day of project week on both repos.
-1.  [ ]  At least 1 commit every day during project week (not necessarily on both repos).
+1.  [x]  At least 1 commit every day during project week (not necessarily on both repos).
 
 ### Documentation
 Produce documentation on Github:
@@ -52,7 +52,7 @@ Your back-end repo's README should also have
 
 ### Client Specifications
 1.  [x]  Use a front-end Javascript app to communicate with your API (both read and write) and render data that it receives in the browser.
-1.  [ ] Have semantically clean HTML and CSS
+1.  [x] Have semantically clean HTML and CSS
 1.  [x] User must be able to create a new resource
 1.  [x] User must be able to update a resource
 1.  [x] User must be able to delete a resource
