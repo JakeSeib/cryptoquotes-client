@@ -4,7 +4,6 @@ import quoteDisplay from './quoteDisplay'
 import { solvedQuoteCreate } from '../../api/solvedQuote.js'
 import messages from '../AutoDismissAlert/messages'
 import './css/QuoteSolve.scss'
-// import messages from '../AutoDismissAlert/messages'
 
 // NOTE:
 // convention is that uppercased letters denote encoded letters, lowercased
@@ -157,6 +156,11 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
               onClick={event => { solved ? alertSolved() : handleHighlight(event) }}
               data-letter={letter}>
               {letter}
+            </p>
+            <p
+              className={`letter-count ${quote.cipherCount[letter] ? 'alpha' : 'sym'}`}
+            >
+              {quote.cipherCount[letter] || '_'}
             </p>
           </span>
         ))}
