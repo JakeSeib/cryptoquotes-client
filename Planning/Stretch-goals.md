@@ -6,11 +6,10 @@
 
 ## Stage 3: stretch goals
 - Styling/UI
-  - create/edit views
   - splash page
   - add help page
 - [Access Control List](https://en.wikipedia.org/wiki/Access-control_list) to only let certain users add quotes
-  - Add badge (https://react-bootstrap.github.io/components/badge/) to preferred users, including app creator
+  - Add [badge](https://react-bootstrap.github.io/components/badge/) to preferred users, including app creator
 - Play without logging in
 - Validation of quotes (have to be above certain size, contain some # of different alphabetical letters)
 - Validation of cipher (letters MUST change when encoded)
@@ -25,4 +24,3 @@
 - Better difficulty setting
 - Save partial progress on quotes (i.e. with componentWillUnmount)
 - Quote categories
-- Check length of submitted quote for min/max length

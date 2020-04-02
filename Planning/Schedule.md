@@ -51,19 +51,19 @@ Client
 1.  [x] Solve view basic QOL
    1.  [x] Guess a letter -> replace all other instances of that letter with that guess
    1.  [x] Show feedback when all spaces are filled in
-1.  [ ] Troubleshoot/Debug
-1.  [ ] Style
+1.  [x] Troubleshoot/Debug
+1.  [x] Style
 
 ### Improved solve view UX
 
-1.  [ ] Can guess letters by highlighting and typing
-1.  [ ] Show counts for each scrambled letter
+1.  [x] Can guess letters by highlighting and typing
+1.  [x] Show counts for each scrambled letter
 1.  [x] Swap logic for guessing a previously-guessed letter
 1.  [ ] On guess, swap active input to the next spot to allow for easy typing
    1.  [ ] Have special darker highlighting to show currently selected spot in addition to selected letter
 1.  [x] Show alphabet with currently guessed letters indicated
    1.  [x] Make alphabet letters clickable
-1.  [ ] Browse view has quotes categorized as default (i.e. provided by the app), created by User, and created by other Users
+1.  [ ] Browse view has quotes categorized as app-provided, created by User, and created by other Users
 
 ### Other stretch goals
 

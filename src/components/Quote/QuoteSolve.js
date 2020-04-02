@@ -4,7 +4,6 @@ import quoteDisplay from './quoteDisplay'
 import { solvedQuoteCreate } from '../../api/solvedQuote.js'
 import messages from '../AutoDismissAlert/messages'
 import './css/QuoteSolve.scss'
-// import messages from '../AutoDismissAlert/messages'
 
 // NOTE:
 // convention is that uppercased letters denote encoded letters, lowercased
@@ -51,6 +50,14 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     }
   }, [guess])
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [guess, highlighted, solved])
+
   const displayGuessLetter = letter => (
     guess.hash[letter] ? guess.hash[letter].toUpperCase() : null
   )
@@ -87,6 +94,20 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
     setGuess(updatedGuess)
   }
 
+  const handleKeyPress = (event) => {
+    if (solved) {
+      alertSolved()
+    } else if ([...alphaDisplay, 'BACKSPACE'].includes(event.key.toUpperCase())) {
+      handleGuess(event)
+    } else {
+      msgAlert({
+        heading: 'Bad character',
+        message: messages.alertOnlyAlpha,
+        variant: 'warning'
+      })
+    }
+  }
+
   const handleGuess = (event) => {
     let cipherLetter
     if (highlighted) {
@@ -98,8 +119,10 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
         variant: 'warning'
       })
     }
-    const newGuess = event.target.getAttribute('data-letter').toLowerCase()
-    if (newGuess === 'clear') {
+    const newGuess = (
+      event.key ? event.key.toLowerCase() : event.target.getAttribute('data-letter').toLowerCase()
+    )
+    if (['clear', 'backspace'].includes(newGuess)) {
       return handleClear(cipherLetter)
     }
     const oldGuess = guess.hash[cipherLetter]
@@ -157,6 +180,11 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
               onClick={event => { solved ? alertSolved() : handleHighlight(event) }}
               data-letter={letter}>
               {letter}
+            </p>
+            <p
+              className={`letter-count ${quote.cipherCount[letter] ? 'alpha' : 'sym'}`}
+            >
+              {quote.cipherCount[letter] || '_'}
             </p>
           </span>
         ))}
