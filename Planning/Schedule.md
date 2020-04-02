@@ -51,8 +51,8 @@ Client
 1.  [x] Solve view basic QOL
    1.  [x] Guess a letter -> replace all other instances of that letter with that guess
    1.  [x] Show feedback when all spaces are filled in
-1.  [ ] Troubleshoot/Debug
-1.  [ ] Style
+1.  [x] Troubleshoot/Debug
+1.  [x] Style
 
 ### Improved solve view UX
 

@@ -9,7 +9,7 @@ Be deployed online, where the rest of the world can access it.
 ### Version Control
 Demonstrate using version control by:
 1.  [x]  Sharing your work through a git repository hosted on Github.
-1.  [ ]  Making frequent, cohesive commits dating back to the **first day**
+1.  [x]  Making frequent, cohesive commits dating back to the **first day**
 of the project week.
 1.  [x]  1 commit on the first day of project week on both repos.
 1.  [x]  At least 1 commit every day during project week (not necessarily on both repos).
@@ -46,9 +46,8 @@ Your back-end repo's README should also have
 1.  [x]  Change password with current and new password.
 1.  [x]  Signup and Signin must only be available to not signed in users.
 1.  [x]  Logout and Change password must only be available to signed in users.
-1.  [ ]  Give feedback to the user after each action's success or failure.
-1.  [ ]  All forms must clear after submit success and user sign-out
-    - [ ] (Optional) Reset form to initial state on failure
+1.  [x]  Give feedback to the user after each action's success or failure.
+1.  [x]  All forms must clear after submit success and user sign-out
 
 ### Client Specifications
 1.  [x]  Use a front-end Javascript app to communicate with your API (both read and write) and render data that it receives in the browser.
@@ -58,9 +57,8 @@ Your back-end repo's README should also have
 1.  [x] User must be able to delete a resource
 1.  [x] User must be able to view a single or multiple resource(s)
 1.  [x] All resource actions that change data must only be available to a signed in user.
-1.  [ ] Give feedback to the user after each action's success or failure.
-1.  [ ] All forms must clear after submit success
-    - [ ] (Optional) Reset form to initial state on failure
+1.  [x] Give feedback to the user after each action's success or failure.
+1.  [x] All forms must clear after submit success
 1.  [x] Protect against Cross-site Scripting
 
 ### API Specifications
