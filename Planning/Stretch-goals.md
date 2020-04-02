@@ -22,5 +22,5 @@
 
 ## Deprioritized ideas
 - Better difficulty setting
-- Save partial progress on quotes (i.e. with componentWillUnmount)
+- Save partial progress on quotes (additional field for solved_quotes)
 - Quote categories

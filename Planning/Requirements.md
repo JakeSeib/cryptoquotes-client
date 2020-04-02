@@ -69,12 +69,12 @@ Your back-end repo's README should also have
 
 ### DO NOT!!
 Your app **must not**:
-1.  [ ]   Delete your repository at any time or start over.
-1.  [ ]   Rely on refreshing the page for any functionality.
-1.  [ ]   Have any user-facing bugs.
-    - [ ] Display non-functional buttons, nor buttons that do not successfully complete a task.
-    - [ ] Show actions at inappropriate times (example:  change password form when a user is not signed in).
-    - [ ] Forms not clearing at appropriate times (example: sign up form not clearing after success).
-1.  [ ]   Use alerts for anything.
-1.  [ ]   Display errors or warnings in the console.
-1.  [ ]   Display debugging messages in the console.
+1.  [x]   Delete your repository at any time or start over.
+1.  [x]   Rely on refreshing the page for any functionality.
+1.  [x]   Have any user-facing bugs.
+    - [x] Display non-functional buttons, nor buttons that do not successfully complete a task.
+    - [x] Show actions at inappropriate times (example:  change password form when a user is not signed in).
+    - [x] Forms not clearing at appropriate times (example: sign up form not clearing after success).
+1.  [x]   Use alerts for anything.
+1.  [x]   Display errors or warnings in the console.
+1.  [x]   Display debugging messages in the console.

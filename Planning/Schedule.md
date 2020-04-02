@@ -63,8 +63,4 @@ Client
    1.  [ ] Have special darker highlighting to show currently selected spot in addition to selected letter
 1.  [x] Show alphabet with currently guessed letters indicated
    1.  [x] Make alphabet letters clickable
-1.  [ ] Browse view has quotes categorized as app-provided, created by User, and created by other Users
-
-### Other stretch goals
-
-See Stretch-goals.md
+1.  [x] Browse view has quotes categorized as app-provided, created by User, and created by other Users

@@ -6,10 +6,10 @@ Users can also create, edit, and delete their own quotes for other users to solv
 
 Also see: the [API Repository](https://github.com/JakeSeib/cryptoquotes-api) and the [deployed client](https://jakeseib.github.io/cryptoquotes-client/).
 
-## How to Play
-To play, sign in and use the dropdown in the top nav bar to go to 'browse quotes'. You will see a list of quotes showing their titles- if you have previously solved any quotes, they will be displayed as solved and you will not be able to click them. Find a quote that you did not create (navigating to a quote you created will prompt you to edit your quote, since solving quotes you added is not very interesting) and click it.
+### How to Play
+To play, sign in and use the dropdown in the top nav bar (or the link on the splash page) to go to 'browse quotes'. You will see a list of quotes showing their titles- if you have previously solved any quotes, they will be displayed as solved and you will not be able to click them. Find a quote that you did not create (navigating to a quote you created will prompt you to edit your quote, since solving quotes you added is not very interesting) and click it.
 
-Once you have selected a quote, input a guess by clicking the space where you want to guess on the quote or author text shown. You will see highlighted the spaces where that letter occurs in the quote & author text. Then click the letter below the quote that you want to input as your guess. Continue until you decode the encoded quote.
+Once you have selected a quote, input a guess by clicking the space where you want to guess on the quote or author text shown. You will see highlighted the spaces where that letter occurs in the quote & author text. Then either type the letter you want to guess or click the desired letter in the box below the quote. Continue until you decode the entire quote.
 
 ### Technologies Used
 -   **Ruby on Rails**: Backend RESTful API
