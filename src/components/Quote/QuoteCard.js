@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Badge from 'react-bootstrap/Badge'
 
-import './QuoteCard.scss'
+import './css/QuoteCard.scss'
 
 const QuoteCard = ({ quote, solved }) => {
   let titleText = <Link to={`/quotes/${quote.id}`}>{quote.title}</Link>
