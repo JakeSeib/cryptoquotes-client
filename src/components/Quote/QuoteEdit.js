@@ -23,7 +23,13 @@ const QuoteEdit = ({ initQuote, user, msgAlert }) => {
         message: messages.updateQuoteSuccess,
         variant: 'success'
       }))
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Update failed with error: ' + error.message,
+          message: messages.quoteUpdateFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   const handleDelete = () => {
@@ -34,7 +40,13 @@ const QuoteEdit = ({ initQuote, user, msgAlert }) => {
         message: messages.deleteQuoteSuccess,
         variant: 'success'
       }))
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Delete failed with error: ' + error.message,
+          message: messages.quoteDeleteFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   let editJSX

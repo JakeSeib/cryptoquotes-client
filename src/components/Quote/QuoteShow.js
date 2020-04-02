@@ -4,6 +4,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import QuoteEdit from './QuoteEdit'
 import QuoteSolve from './QuoteSolve'
 import { quoteShow } from '../../api/quote.js'
+import messages from '../AutoDismissAlert/messages'
 
 const QuoteShow = ({ match, user, msgAlert }) => {
   // view should either be solve or edit, depending upon ownership
@@ -17,7 +18,14 @@ const QuoteShow = ({ match, user, msgAlert }) => {
         setQuote(res.data.quote)
         setIsOwner(res.data.quote.user.id === user.id)
       })
-      .catch(console.error)
+      .catch(error => {
+        setQuote(null)
+        msgAlert({
+          heading: 'Failed to get quote with error: ' + error.message,
+          message: messages.quoteShowFailure,
+          variant: 'danger'
+        })
+      })
   }, [])
 
   let showJSX

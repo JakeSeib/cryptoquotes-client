@@ -15,6 +15,14 @@ const QuoteCreate = ({ user, msgAlert }) => {
   const handleSubmit = event => {
     event.preventDefault()
 
+    if ([quote.title, quote.text, quote.author].includes('')) {
+      return msgAlert({
+        heading: 'All fields are required',
+        message: messages.createWithBlank,
+        variant: 'danger'
+      })
+    }
+
     quote.cipher = createCipher()
     quote.difficulty = createDifficulty(quote)
 
@@ -30,7 +38,13 @@ const QuoteCreate = ({ user, msgAlert }) => {
       .then(res => {
         setRedirect(<Redirect to={`/quotes/${res.data.quote.id}`} />)
       })
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Create failed with error: ' + error.message,
+          message: messages.createFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   let createJSX

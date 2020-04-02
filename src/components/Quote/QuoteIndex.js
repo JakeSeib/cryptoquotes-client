@@ -4,19 +4,27 @@ import Spinner from 'react-bootstrap/Spinner'
 import QuoteCard from './QuoteCard'
 import { quoteIndex } from '../../api/quote.js'
 import { solvedQuoteIndex } from '../../api/solvedQuote.js'
+import messages from '../AutoDismissAlert/messages'
 import './QuoteIndex.scss'
 
 // todo: add other data to index & solve view (difficulty, creator's name, title)
 // make QuoteCard actually render something nice
 
-const QuoteIndex = function ({ user }) {
+const QuoteIndex = function ({ user, msgAlert }) {
   const [quotes, setQuotes] = useState(null)
   const [solvedQuotes, setSolvedQuotes] = useState([])
 
   useEffect(() => {
     quoteIndex()
       .then(res => setQuotes(res.data.quotes))
-      .catch(console.error)
+      .catch(error => {
+        setQuotes(null)
+        msgAlert({
+          heading: 'Get quotes failed with error: ' + error.message,
+          message: messages.quoteIndexFailure,
+          variant: 'danger'
+        })
+      })
   }, [])
 
   useEffect(() => {
@@ -24,7 +32,14 @@ const QuoteIndex = function ({ user }) {
       .then(res => {
         setSolvedQuotes(res.data.solved_quotes)
       })
-      .catch(console.error)
+      .catch(error => {
+        setSolvedQuotes([])
+        msgAlert({
+          heading: 'Failed to get your previous solutions with error: ' + error.message,
+          message: messages.solvedQuotesIndexFailure,
+          variant: 'danger'
+        })
+      })
   }, [])
 
   let quotesJSX
@@ -35,7 +50,7 @@ const QuoteIndex = function ({ user }) {
       </Spinner>
     )
   } else if (quotes.length === 0) {
-    quotesJSX = 'No quotes yet'
+    quotesJSX = 'No quotes!'
   } else {
     quotesJSX = quotes.map(quote => (
       <li key={quote.id}>

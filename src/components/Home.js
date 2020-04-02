@@ -1,16 +1,18 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Redirect, Link } from 'react-router-dom'
+
+import '../index.scss'
 
 const Home = (props) => {
   let homeJSX
   if (!props.user) {
-    homeJSX = <Redirect to='/sign-in' />
+    homeJSX = <Redirect to='/sign-up' />
   } else {
     homeJSX = (
-      <Fragment>
+      <main>
         <h4>Welcome to Cryptoquotes by Jake Seib</h4>
-        <Link to="/quotes">Browse Quotes</Link>
-      </Fragment>
+        <Link className='index-link' to="/quotes">Browse Quotes</Link>
+      </main>
     )
   }
   return homeJSX
