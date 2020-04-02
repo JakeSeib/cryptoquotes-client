@@ -47,7 +47,7 @@ Client
 1.  [x] Get owned Solved_quotes (curl/postman then web app)
 
 ### MVP Final Touches
-1.  [ ] README
+1.  [x] README
 1.  [x] Solve view basic QOL
    1.  [x] Guess a letter -> replace all other instances of that letter with that guess
    1.  [x] Show feedback when all spaces are filled in
