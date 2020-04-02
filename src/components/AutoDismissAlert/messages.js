@@ -13,6 +13,7 @@ export default {
   alertSolved: 'Quote has already been solved',
   alertNullSelected: 'You must first enter a guess for the selected letter to do that',
   alertNoHighlight: 'You must first select a letter in the quote to do that',
+  alertOnlyAlpha: 'You may only guess alphabetical characters',
   createFailure: 'Failed to create your quote',
   createWithBlank: 'Failed to create your quote. You must enter a title, author, and the quote\'s text',
   quoteIndexFailure: 'Failed to get quotes',
