@@ -11,7 +11,7 @@ To play, sign in and use the dropdown in the top nav bar (or the link on the spl
 
 Once you have selected a quote, input a guess by clicking the space where you want to guess on the quote or author text shown. You will see highlighted the spaces where that letter occurs in the quote & author text. Then either type the letter you want to guess or click the desired letter in the box below the quote. Continue until you decode the entire quote.
 
-![Screenshot of an unsolved cryptogram](https://i.imgur.com/zBrgitT.png)
+![Screenshot of an unsolved cryptogram](https://i.imgur.com/VH2ms5n.png)
 
 ### Technologies Used
 -   **Ruby on Rails**: Backend RESTful API
