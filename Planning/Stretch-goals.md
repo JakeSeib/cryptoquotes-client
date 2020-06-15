@@ -5,9 +5,6 @@
 - Refactor Quotes to be a class with methods for createCipher, createDifficulty, etc.
 
 ## Stage 3: stretch goals
-- Styling/UI
-  - splash page
-  - add help page
 - [Access Control List](https://en.wikipedia.org/wiki/Access-control_list) to only let certain users add quotes
   - Add [badge](https://react-bootstrap.github.io/components/badge/) to preferred users, including app creator
 - Play without logging in
