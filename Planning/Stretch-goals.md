@@ -20,6 +20,19 @@
 - Pagination for quotes (within each category- i.e. app, yours, others)
 - Let users rate quotes 1-5
 
+## Based on feedback/testing
+The difficulty function is not very good. It clumps difficulties at the endpoints, when it should probably follow a normal distribution, clumping around 3.
+
+Should prompt user to go back to browse on game completion
+
+Move some of the logic (cipher setting) to backend? Depends what might want to stay on frontend in case I get to playing without signing in. If it's going to be part of Quote class, it can stay
+
+Don't swap two guesses- if previously guessed, just replace with blank
+
+Better cipher generation (no letter has previous index) links:
+https://en.wikipedia.org/wiki/Derangement
+https://stackoverflow.com/questions/25200220/generate-a-random-derangement-of-a-list
+
 ## Deprioritized ideas
 - Better difficulty setting
 - Save partial progress on quotes (additional field for solved_quotes)
