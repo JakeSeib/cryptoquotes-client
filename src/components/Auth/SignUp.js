@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { signUp, signIn } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
+import './css/AuthForm.scss'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -54,7 +55,7 @@ class SignUp extends Component {
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3>Sign Up</h3>
-          <Form onSubmit={this.onSignUp}>
+          <Form className='auth-form' onSubmit={this.onSignUp}>
             <Form.Group controlId="email">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -106,6 +107,7 @@ class SignUp extends Component {
               Submit
             </Button>
           </Form>
+          <Link to="/sign-in">Already have an account? Sign in instead</Link>
         </div>
       </div>
     )

@@ -22,8 +22,6 @@
 - Let users rate quotes 1-5
 
 ## Based on feedback/testing
-Have link to sign-in below sign-up form (and vice versa)
-
 The difficulty function is not very good. It clumps difficulties at the endpoints, when it should probably follow a normal distribution, clumping around 3.
 
 Should prompt user to go back to browse on game completion
