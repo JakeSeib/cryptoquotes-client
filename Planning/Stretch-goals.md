@@ -2,10 +2,9 @@
 - Make whole "quote card" clickable in index view instead of just the title
 - replace 'clear' text in alphaDisplay with a button with its own event handler
 - Show difficulty as stars (with grayed out stars for remaining ones if <5) to better convey that 5 is max
+- On small screens, long words are split across multiple lines. Should give some visual indication that this is happening
 
 ## Stage 3: stretch goals
-- Mobile improvements
-  - Primarily, make the box for selecting a letter to guess bigger, make sure long words aren't unnecessarily split up into multiple lines (probably make overall text size smaller to help with both of these)
 - Play without logging in
 - Validation of quotes (have to be above certain size, contain some # of different alphabetical letters)
 - Validation of cipher (letters MUST change when encoded)
@@ -16,8 +15,6 @@
 - Refactor Quotes to be class-based with methods for createCipher, createDifficulty, etc.
 
 ## Based on feedback/testing
-The difficulty function is not very good. It clumps difficulties at the endpoints, when it should probably follow a normal distribution, clumping around 3.
-
 Should prompt user to go back to browse on game completion
 
 Move some of the logic (cipher setting) to backend? Depends what might want to stay on frontend in case I get to playing without signing in. If it's going to be part of Quote class, it can stay
@@ -26,6 +23,7 @@ Don't swap two guesses- if previously guessed, just replace with blank
 
 ## Deprioritized ideas
 - Better difficulty setting
+  - The difficulty function is not very good. It clumps difficulties at the endpoints of 1 and 5, when it should probably follow a normal distribution, clumping around 3.
 - Save partial progress on quotes (additional field for solved_quotes)
 - Quote categories
 - Track and show performance metrics (time to complete, hints used)
