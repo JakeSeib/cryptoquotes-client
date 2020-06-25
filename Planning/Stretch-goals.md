@@ -1,8 +1,6 @@
-## Small improvements
-- Make whole "quote card" clickable in index view instead of just the title
-- replace 'clear' text in alphaDisplay with a button with its own event handler
-- Show difficulty as stars (with grayed out stars for remaining ones if <5) to better convey that 5 is max
-- On small screens, long words are split across multiple lines. Should give some visual indication that this is happening
+## Based on feedback/testing
+- Should prompt user to go back to browse on game completion
+- Don't swap two guesses- if previously guessed, just replace with blank
 
 ## Stage 3: stretch goals
 - Play without logging in
@@ -14,14 +12,11 @@
 - Pagination for quotes (within each category- i.e. app, yours, others)
 - Refactor Quotes to be class-based with methods for createCipher, createDifficulty, etc.
 
-## Based on feedback/testing
-Should prompt user to go back to browse on game completion
+## Known issues
+- On small screens, long words are split across multiple lines, and it is difficult to tell that this is the case
 
-Move some of the logic (cipher setting) to backend? Depends what might want to stay on frontend in case I get to playing without signing in. If it's going to be part of Quote class, it can stay
-
-Don't swap two guesses- if previously guessed, just replace with blank
-
-## Deprioritized ideas
+## Deprioritized features
+- Show difficulty as stars (with grayed out stars for remaining ones if <5) to better convey that 5 is max
 - Better difficulty setting
   - The difficulty function is not very good. It clumps difficulties at the endpoints of 1 and 5, when it should probably follow a normal distribution, clumping around 3.
 - Save partial progress on quotes (additional field for solved_quotes)
@@ -32,3 +27,4 @@ Don't swap two guesses- if previously guessed, just replace with blank
 - Let users rate quotes 1-5
 - [Access Control List](https://en.wikipedia.org/wiki/Access-control_list) to only let certain users add quotes
   - Add [badge](https://react-bootstrap.github.io/components/badge/) to preferred users, including app creator
+- Replace 'clear' text in alphaDisplay with a button with its own event handler
