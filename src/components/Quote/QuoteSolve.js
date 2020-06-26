@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import quoteDisplay from './quoteDisplay'
 import { solvedQuoteCreate } from '../../api/solvedQuote.js'
@@ -217,10 +218,13 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
       ))}
     </section>
 
+  const indexLinkJSX = solved ? <Link className='index-link' to={'/quotes'}>Quote solved! Browse other quotes to solve more</Link> : null
+
   return (
     <section className='solve-puzzle'>
       <h3>{quote.title} by {quote.user.name}</h3>
       {quoteTextJSX}
+      {indexLinkJSX}
       {letterDisplayJSX}
     </section>
   )
