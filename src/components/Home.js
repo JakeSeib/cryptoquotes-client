@@ -11,7 +11,7 @@ const Home = (props) => {
     homeJSX = (
       <main>
         <h4>Welcome to Cryptoquotes by Jacob Seib</h4>
-        <Link className='index-link' to="/quotes">Browse Quotes</Link>
+        <Link className='splash-link' to="/quotes">Browse Quotes</Link>
         <section>
           <p className='splash-p'>
           In this app, you will solve cryptograms- short puzzles with some encrypted text for you to decode. In this case, the text will be a quote by someone famous. The original text of the quote has been scrambled using a substitution cipher, meaning that each letter in the alphabet has a randomly chosen letter that will replace it in the encrypted text. For example, every time the letter `A` occurs in the original text, the letter `T` might appear in the encrypted text.

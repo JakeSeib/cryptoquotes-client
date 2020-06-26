@@ -138,12 +138,9 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
       // newGuess was previously guessed elsewhere & cipherLetter had a previous guess
       if (oldGuess) {
         updateWithRegex(updatedGuess, new RegExp(`${oldGuess}`, 'g'), cipherLetter)
-        updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldGuess)
-        updatedGuess.hash[oldCipherPair[0]] = oldGuess
-      } else {
-        updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
-        updatedGuess.hash[oldCipherPair[0]] = null
       }
+      updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
+      updatedGuess.hash[oldCipherPair[0]] = null
       // cipherLetter had a previous guess
     } else if (oldGuess) {
       updateWithRegex(updatedGuess, new RegExp(`${oldGuess}`, 'g'), newGuess)

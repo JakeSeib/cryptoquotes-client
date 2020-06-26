@@ -1,8 +1,4 @@
-## Based on feedback/testing
-- Should prompt user to go back to browse on game completion
-- Don't swap two guesses- if previously guessed, just replace with blank
-
-## Stage 3: stretch goals
+## Stretch goals
 - Play without logging in
 - Validation of quotes (have to be above certain size, contain some # of different alphabetical letters)
 - Validation of cipher (letters MUST change when encoded)
