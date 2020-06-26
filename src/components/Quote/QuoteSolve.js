@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import quoteDisplay from './quoteDisplay'
 import { solvedQuoteCreate } from '../../api/solvedQuote.js'
@@ -137,12 +138,9 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
       // newGuess was previously guessed elsewhere & cipherLetter had a previous guess
       if (oldGuess) {
         updateWithRegex(updatedGuess, new RegExp(`${oldGuess}`, 'g'), cipherLetter)
-        updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldGuess)
-        updatedGuess.hash[oldCipherPair[0]] = oldGuess
-      } else {
-        updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
-        updatedGuess.hash[oldCipherPair[0]] = null
       }
+      updateWithRegex(updatedGuess, new RegExp(`${newGuess}`, 'g'), oldCipherPair[0])
+      updatedGuess.hash[oldCipherPair[0]] = null
       // cipherLetter had a previous guess
     } else if (oldGuess) {
       updateWithRegex(updatedGuess, new RegExp(`${oldGuess}`, 'g'), newGuess)
@@ -217,10 +215,13 @@ const QuoteSolve = ({ quote, user, msgAlert }) => {
       ))}
     </section>
 
+  const indexLinkJSX = solved ? <Link className='index-link' to={'/quotes'}>Quote solved! Browse other quotes to solve more</Link> : null
+
   return (
     <section className='solve-puzzle'>
       <h3>{quote.title} by {quote.user.name}</h3>
       {quoteTextJSX}
+      {indexLinkJSX}
       {letterDisplayJSX}
     </section>
   )
